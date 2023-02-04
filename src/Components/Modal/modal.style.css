@@ -1,0 +1,57 @@
+/*Modal*/
+
+.align-middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.control-button {
+    margin: auto;
+    width: 100px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #575A5A;
+    color: white;
+}
+
+.control-button:hover {
+    font-weight: 600;
+    background-color: #939797;
+}
+
+.modal-main-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.modal-main {
+    border: 1px solid black;
+    margin-top: 300px;
+    margin-left: 25%;
+    width: 600px;
+    background-color: White;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.close-button {
+    text-align: right;
+}
+
+.close-button button {
+    cursor: pointer;
+    background-color: #002A70;
+    color: white;
+}

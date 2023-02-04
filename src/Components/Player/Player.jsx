@@ -22,6 +22,30 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
     playPause;
   };
 
+  const forwaredReverse = (val) => {
+    //videoRef.current.currentTime += 5;
+
+    val === true
+      ? (videoRef.current.currentTime += 1)
+      : (videoRef.current.currentTime -= 1);
+    console.log(videoRef.current.currentTime);
+  };
+
+  const handleKeyPress = (e) => {
+    switch (e.key) {
+      case "ArrowRight":
+        forwaredReverse(true);
+        return;
+      case "ArrowLeft":
+        forwaredReverse(false);
+        return;
+
+      default:
+        console.log("default");
+        return;
+    }
+  };
+
   const handleProgress = (e) => {
     console.log((e.target.currentTime / e.target.duration) * 100);
     if (isNaN(e.target.duration))
@@ -40,7 +64,11 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
           crossorigin="anonymous"
           referrerpolicy="no-referrer"
         />
-        <div className="c-video">
+        <div
+          className="c-video"
+          tabIndex={0}
+          onKeyDown={(e) => handleKeyPress(e)}
+        >
           <video
             ref={videoRef}
             className="video"
@@ -57,7 +85,7 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
               <button
                 className={isPlaying ? "play" : "pause"}
                 id="play-pause"
-                onClick={handlePlayPause}
+                onClick={playPause}
               ></button>
             </div>
           </div>
