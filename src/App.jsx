@@ -2,16 +2,16 @@ import { useState } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import { Header, Modal, Navigator, Player, RangeInput } from "./Components";
 import * as helpers from "./utils/helpers";
-import demoVideo from "./assets/3000kbs_starbucks.mp4";
-import demoVideo2 from "./assets/bmf.mp4";
+// import demoVideo2 from "./assets/3000kbs_starbucks.mp4";
+// import demoVideo from "./assets/bmf.mp4";
 import "./App.css";
 
 const FF = createFFmpeg({ log: true }); // add url to ffmpeg
 
-const liveVideo =
+const liveVideo2 =
   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
 
-const liveVideo2 =
+const liveVideo =
   "https://g.mandela.h.sabishare.com/dl/zJhqauDAd04/fb06ad96c78bd2d4f7672a78e03dc599a23c946cf9f5af228cf717e8e78e1470/BMF_S02E02_-_Family_Business_(NetNaija.com).mkv";
 
 function App() {
@@ -54,7 +54,7 @@ function App() {
       duration === MAX_NUMBER_OF_IMAGES ? 1 : duration / NUMBER_OF_IMAGES;
 
     const arrayOfImageURIs = [];
-    FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo2));
+    FF.FS("writeFile", "starbucks.mp4", await fetchFile(liveVideo2));
 
     for (let i = 0; i < NUMBER_OF_IMAGES; i++) {
       let startTimeInSecs = helpers.toTimeString(Math.round(i * offset));
@@ -99,7 +99,7 @@ function App() {
     // );
 
     try {
-      FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo2));
+      FF.FS("writeFile", "starbucks.mp4", await fetchFile(liveVideo2));
       // await FF.run('-ss', '00:00:13.000', '-i', inputVideoFile.name, '-t', '00:00:5.000', 'ping.mp4');
       await FF.run(
         "-ss",
@@ -176,7 +176,7 @@ function App() {
       <Header />
       <div id="main">
         <Player
-          video={demoVideo2}
+          video={liveVideo2}
           loadedData={handleLoadedData}
           isPlaying={isPlaying}
           playPause={playPause}
