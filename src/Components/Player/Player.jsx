@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const Player = ({ video, loadedData, isPlaying, playPause }) => {
+const Player = ({
+  video,
+  loadedData,
+  isPlaying,
+  playPause,
+  rangeUpdateStart,
+  rangeUpdateEnd,
+}) => {
   const [progress, setProgress] = useState(0);
   const videoRef = React.createRef();
 
@@ -13,7 +20,6 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
   };
 
   const handlePlayPause = () => {
-    console.log(isPlaying);
     if (isPlaying) {
       videoRef.current.pause();
     } else {
@@ -23,12 +29,11 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
   };
 
   const forwaredReverse = (val) => {
-    //videoRef.current.currentTime += 5;
+    const speed = 0.01 * videoRef.current.duration;
 
     val === true
-      ? (videoRef.current.currentTime += 1)
-      : (videoRef.current.currentTime -= 1);
-    console.log(videoRef.current.currentTime);
+      ? (videoRef.current.currentTime += speed)
+      : (videoRef.current.currentTime -= speed);
   };
 
   const handleKeyPress = (e) => {
@@ -40,6 +45,18 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
         forwaredReverse(false);
         return;
 
+      case "ArrowUp":
+        const mit =
+          (videoRef.current.currentTime / videoRef.current.duration) * 100;
+        rangeUpdateStart(mit);
+        return;
+
+      case "ArrowDown":
+        const mot =
+          (videoRef.current.currentTime / videoRef.current.duration) * 100;
+        rangeUpdateEnd(mot);
+        return;
+
       default:
         console.log("default");
         return;
@@ -47,7 +64,7 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
   };
 
   const handleProgress = (e) => {
-    console.log((e.target.currentTime / e.target.duration) * 100);
+    console.log("time update", e.target.currentTime);
     if (isNaN(e.target.duration))
       // duration is NotaNumber at Beginning.
       return;
@@ -72,14 +89,15 @@ const Player = ({ video, loadedData, isPlaying, playPause }) => {
           <video
             ref={videoRef}
             className="video"
-            onProgress={handleProgress}
+            //onProgress={handleProgress}
+            onTimeUpdate={handleProgress}
             crossorigin="anonymous"
             src={video}
             onLoadedMetadata={passMetaData}
           ></video>
           <div className="controls">
             <div className="red-bar">
-              <div style={{ width: "1%" }} className="red"></div>
+              <div style={{ width: progress + "%" }} className="red"></div>
             </div>
             <div className="buttons">
               <button

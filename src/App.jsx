@@ -3,12 +3,16 @@ import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import { Header, Modal, Navigator, Player, RangeInput } from "./Components";
 import * as helpers from "./utils/helpers";
 import demoVideo from "./assets/3000kbs_starbucks.mp4";
+import demoVideo2 from "./assets/bmf.mp4";
 import "./App.css";
 
 const FF = createFFmpeg({ log: true }); // add url to ffmpeg
 
 const liveVideo =
   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+
+const liveVideo2 =
+  "https://g.mandela.h.sabishare.com/dl/zJhqauDAd04/fb06ad96c78bd2d4f7672a78e03dc599a23c946cf9f5af228cf717e8e78e1470/BMF_S02E02_-_Family_Business_(NetNaija.com).mkv";
 
 function App() {
   const [videoMeta, setVideoMeta] = useState(null);
@@ -50,7 +54,7 @@ function App() {
       duration === MAX_NUMBER_OF_IMAGES ? 1 : duration / NUMBER_OF_IMAGES;
 
     const arrayOfImageURIs = [];
-    FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
+    FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo2));
 
     for (let i = 0; i < NUMBER_OF_IMAGES; i++) {
       let startTimeInSecs = helpers.toTimeString(Math.round(i * offset));
@@ -95,7 +99,7 @@ function App() {
     // );
 
     try {
-      FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
+      FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo2));
       // await FF.run('-ss', '00:00:13.000', '-i', inputVideoFile.name, '-t', '00:00:5.000', 'ping.mp4');
       await FF.run(
         "-ss",
@@ -160,6 +164,7 @@ function App() {
       case "s":
         makeEntry();
         return;
+
       default:
         return "foo";
     }
@@ -171,10 +176,12 @@ function App() {
       <Header />
       <div id="main">
         <Player
-          video={demoVideo}
+          video={demoVideo2}
           loadedData={handleLoadedData}
           isPlaying={isPlaying}
           playPause={playPause}
+          rangeUpdateStart={setRstart}
+          rangeUpdateEnd={setRend}
         />
         {/* <nav>nav</nav> */}
         <Navigator thumbNails={thumbNails} />
@@ -187,17 +194,17 @@ function App() {
           handleUpdaterEnd={handleUpdateRange(setRend)}
           loading={thumbnailIsProcessing}
           videoMeta={videoMeta}
-          control={
-            <div className="u-center">
-              <button
-                onClick={handleTrim}
-                className="btn btn_b"
-                disabled={trimIsProcessing}
-              >
-                {trimIsProcessing ? "trimming..." : ""}
-              </button>
-            </div>
-          }
+          // control={
+          //   <div className="u-center">
+          //     <button
+          //       onClick={handleTrim}
+          //       className="btn btn_b"
+          //       disabled={trimIsProcessing}
+          //     >
+          //       {trimIsProcessing ? "trimming..." : ""}
+          //     </button>
+          //   </div>
+          // }
           thumbNails={thumbNails}
         />
       </footer>
