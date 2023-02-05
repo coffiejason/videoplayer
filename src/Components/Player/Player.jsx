@@ -29,7 +29,7 @@ const Player = ({
   };
 
   const forwaredReverse = (val) => {
-    const speed = 0.01 * videoRef.current.duration;
+    const speed = 0.0005 * videoRef.current.duration;
 
     val === true
       ? (videoRef.current.currentTime += speed)
@@ -106,6 +106,7 @@ const Player = ({
                 onClick={playPause}
               ></button>
             </div>
+            {/* <p style={{ color: "white" }}>12</p> */}
           </div>
         </div>
       </article>
