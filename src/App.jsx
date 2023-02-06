@@ -9,7 +9,7 @@ import "./App.css";
 const FF = createFFmpeg({ log: true }); // add url to ffmpeg
 
 const liveVideo2 =
-  "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
 
 const liveVideo =
   "https://g.mandela.h.sabishare.com/dl/zJhqauDAd04/fb06ad96c78bd2d4f7672a78e03dc599a23c946cf9f5af228cf717e8e78e1470/BMF_S02E02_-_Family_Business_(NetNaija.com).mkv";
