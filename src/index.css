@@ -1,7 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+:root {
+  --font-size: 1.3rem;
+  --pops: 'Poppins', sans-serif;
+  --sans: Montserrat, sans-serif;
+}
+
+
 body {
   font: 24px Helvetica;
   background: #fff;
   overflow: hidden;
+  font-family: var(--pops);
 }
 
 /**/
@@ -17,9 +27,9 @@ body {
 #main>article {
   margin: 4px;
   padding: 5px;
-  border: 1px solid #cccc33;
+  border: 1px solid #f4f4f4;
   border-radius: 7pt;
-  background: #dddd88;
+  background: #f9f2f2;
   flex: 3 1 60%;
   order: 2;
 }

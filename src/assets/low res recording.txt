@@ -1,0 +1,1 @@
+ffmpeg -i udp://230.30.10.4:5000 -vcodec libx265 -crf 28 output.mp4

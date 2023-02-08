@@ -12,6 +12,8 @@ build
 dist-ssr
 *.local
 src/assets/bmf.mp4
+src/assets/output.mp4
+src/assets/output2.mp4
 
 # Editor directories and files
 .vscode/*

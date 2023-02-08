@@ -20,7 +20,7 @@
     display: flex;
     align-items: flex-start;
     position: relative;
-    border: 2px solid red;
+    border: 2px solid #f4434a;
     position: relative;
     height: 6rem;
     /* overflow: hidden; */
@@ -34,10 +34,10 @@
 }
 
 .clip_box {
-    border: 10px solid red;
+    border: 10px solid #f4434a;
     position: absolute;
     height: 110%;
-    box-shadow: 2000 0 5px 10px red, -400px 0 5px -10px red;
+    box-shadow: 2000 0 5px 10px #f4434a, -400px 0 5px -10px #f4434a;
     transform: translateY(-5%);
     border-radius: 10px;
 }
@@ -70,7 +70,7 @@
 .clip_box_des {
     width: 1.3rem;
     height: 100%;
-    background-color: red;
+    background-color: #f4434a;
     position: absolute;
     z-index: -1;
     display: flex;

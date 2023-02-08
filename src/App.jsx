@@ -3,7 +3,7 @@ import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import { Header, Modal, Navigator, Player, RangeInput } from "./Components";
 import * as helpers from "./utils/helpers";
 // import demoVideo2 from "./assets/3000kbs_starbucks.mp4";
-// import demoVideo from "./assets/bmf.mp4";
+import demoVideo from "./assets/output2.mp4";
 import "./App.css";
 
 const FF = createFFmpeg({ log: true }); // add url to ffmpeg
@@ -54,7 +54,7 @@ function App() {
       duration === MAX_NUMBER_OF_IMAGES ? 1 : duration / NUMBER_OF_IMAGES;
 
     const arrayOfImageURIs = [];
-    FF.FS("writeFile", "starbucks.mp4", await fetchFile(liveVideo2));
+    FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
 
     for (let i = 0; i < NUMBER_OF_IMAGES; i++) {
       let startTimeInSecs = helpers.toTimeString(Math.round(i * offset));
@@ -99,7 +99,7 @@ function App() {
     // );
 
     try {
-      FF.FS("writeFile", "starbucks.mp4", await fetchFile(liveVideo2));
+      FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
       // await FF.run('-ss', '00:00:13.000', '-i', inputVideoFile.name, '-t', '00:00:5.000', 'ping.mp4');
       await FF.run(
         "-ss",
@@ -165,6 +165,15 @@ function App() {
         makeEntry();
         return;
 
+      case "S":
+        makeEntry();
+        return;
+
+      // case "s":
+      //   handleTrim();
+      //   console.log("triming");
+      //   return;
+
       default:
         return "foo";
     }
@@ -172,11 +181,11 @@ function App() {
 
   return (
     <div className="App" tabIndex={0} onKeyDown={(e) => handleKeyPress(e)}>
-      {isShow && <Modal onClose={onClose} />}
+      {isShow && <Modal onClose={onClose} handleTrim={handleTrim} />}
       <Header />
       <div id="main">
         <Player
-          video={liveVideo2}
+          video={demoVideo}
           loadedData={handleLoadedData}
           isPlaying={isPlaying}
           playPause={playPause}
