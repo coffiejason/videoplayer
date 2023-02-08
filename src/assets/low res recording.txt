@@ -1,1 +1,5 @@
 ffmpeg -i udp://230.30.10.4:5000 -vcodec libx265 -crf 28 output.mp4
+
+ffmpeg -i udp://230.30.10.4:5000  -c:a copy -c:v libx264 -b:v 1M -r 30 -s 848x480 new_output.mp4
+
+final: ffmpeg -i udp://230.30.10.4:5000 -c copy -f segment -segment_time 300 -segment_wrap 1000000 -reset_timestamps 1 -vcodec libx265 -crf 28 output%02d.mkv -y
