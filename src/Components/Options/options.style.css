@@ -1,0 +1,96 @@
+.OptionsContainer {
+    padding: 0.6vh 1.5vw;
+}
+
+.OptionsContainer .form .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.OptionsContainer .form .row .col {
+    flex: 1 1 250px;
+}
+
+.OptionsContainer .form .row .col .title {
+    font-size: 12px;
+    color: #333;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.OptionsContainer .form .row .col .inputBox {
+    margin: 15px 0;
+}
+
+.OptionsContainer .form .row .col .inputBox span {
+    margin-bottom: 10px;
+    display: block;
+    font-size: 17px;
+}
+
+.formDiv {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 5pt;
+    text-transform: none;
+}
+
+.OptionsContainer .form .row .col .inputBox input,
+.OptionsContainer .form .row .col .inputBox select,
+.OptionsContainer .form .row .col .inputBox textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 5pt;
+    text-transform: none;
+}
+
+.OptionsContainer .form .row .col .inputBox input:focus,
+.OptionsContainer .form .row .col .inputBox select:focus,
+.OptionsContainer .form .row .col .inputBox textarea:focus {
+    border: 1px solid #000;
+}
+
+.OptionsContainer .form .row .col .flex {
+    display: flex;
+    gap: 15px;
+}
+
+.OptionsContainer .form .row .col .flex .inputBox {
+    margin-top: 5px;
+}
+
+
+.OptionsContainer .form .submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5pt;
+    background: #f4434a;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.OptionsContainer .form .submit-btn:hover {
+    background: #ef7478;
+}
+
+.OptionsContainer .form .export-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 17px;
+    border-radius: 5pt;
+    background: #f0efef;
+    color: #747474;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.OptionsContainer .form .export-btn:hover {
+    background: #cfcfcf;
+}

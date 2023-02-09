@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const Player = ({
   video,
@@ -9,7 +9,8 @@ const Player = ({
   rangeUpdateEnd,
 }) => {
   const [progress, setProgress] = useState(0);
-  const videoRef = React.createRef();
+  //const videoRef = React.createRef();
+  const videoRef = useRef();
 
   useEffect(() => {
     handlePlayPause();

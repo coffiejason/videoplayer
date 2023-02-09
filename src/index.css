@@ -37,9 +37,9 @@ body {
 #main>nav {
   margin: 4px;
   padding: 5px;
-  border: 1px solid #8888bb;
+  border: 1px solid #FAF8FF;
   border-radius: 7pt;
-  background: #ccccff;
+  background: #FAF8FF;
   flex: 1 6 20%;
   order: 1;
 
@@ -50,7 +50,7 @@ body {
   padding: 5px;
   border: 1px solid #e2e2e3;
   border-radius: 7pt;
-  background: #efeeee;
+  background: #0000;
   flex: 1 6 20%;
   order: 3;
   overflow-y: scroll
@@ -62,9 +62,9 @@ footer {
   margin: 4px;
   padding: 5px;
   min-height: 65px;
-  border: 1px solid #FFF4F3;
+  border: 1px solid #f4f4f4;
   border-radius: 7pt;
-  background: #FFF4F3;
+  background: #FAF8FF;
 
 }
 

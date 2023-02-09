@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
-import { Header, Modal, Navigator, Player, RangeInput } from "./Components";
+import {
+  Header,
+  Modal,
+  Navigator,
+  Options,
+  Player,
+  RangeInput,
+} from "./Components";
 import * as helpers from "./utils/helpers";
 // import demoVideo2 from "./assets/3000kbs_starbucks.mp4";
 import demoVideo from "./assets/output2.mp4";
 import "./App.css";
+import { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const FF = createFFmpeg({ log: true }); // add url to ffmpeg
 
@@ -182,41 +191,46 @@ function App() {
   return (
     <div className="App" tabIndex={0} onKeyDown={(e) => handleKeyPress(e)}>
       {isShow && <Modal onClose={onClose} handleTrim={handleTrim} />}
-      <Header />
-      <div id="main">
-        <Player
-          video={demoVideo}
-          loadedData={handleLoadedData}
-          isPlaying={isPlaying}
-          playPause={playPause}
-          rangeUpdateStart={setRstart}
-          rangeUpdateEnd={setRend}
-        />
-        {/* <nav>nav</nav> */}
-        <Navigator thumbNails={thumbNails} />
-      </div>
-      <footer>
-        <RangeInput
-          rEnd={rEnd}
-          rStart={rStart}
-          handleUpdaterStart={handleUpdateRange(setRstart)}
-          handleUpdaterEnd={handleUpdateRange(setRend)}
-          loading={thumbnailIsProcessing}
-          videoMeta={videoMeta}
-          // control={
-          //   <div className="u-center">
-          //     <button
-          //       onClick={handleTrim}
-          //       className="btn btn_b"
-          //       disabled={trimIsProcessing}
-          //     >
-          //       {trimIsProcessing ? "trimming..." : ""}
-          //     </button>
-          //   </div>
-          // }
-          thumbNails={thumbNails}
-        />
-      </footer>
+      <SkeletonTheme baseColor="#E3E0F3" highlightColor="#FAF8FF">
+        <Header />
+        <div id="main">
+          <Player
+            video={demoVideo}
+            loadedData={handleLoadedData}
+            isPlaying={isPlaying}
+            playPause={playPause}
+            rangeUpdateStart={setRstart}
+            rangeUpdateEnd={setRend}
+          />
+          <Options />
+          <Navigator
+            isLoading={thumbNails.length === 0 ? true : false}
+            thumbNails={thumbNails}
+          />
+        </div>
+        <footer>
+          <RangeInput
+            rEnd={rEnd}
+            rStart={rStart}
+            handleUpdaterStart={handleUpdateRange(setRstart)}
+            handleUpdaterEnd={handleUpdateRange(setRend)}
+            loading={thumbnailIsProcessing}
+            videoMeta={videoMeta}
+            // control={
+            //   <div className="u-center">
+            //     <button
+            //       onClick={handleTrim}
+            //       className="btn btn_b"
+            //       disabled={trimIsProcessing}
+            //     >
+            //       {trimIsProcessing ? "trimming..." : ""}
+            //     </button>
+            //   </div>
+            // }
+            thumbNails={thumbNails}
+          />
+        </footer>
+      </SkeletonTheme>
     </div>
   );
 }

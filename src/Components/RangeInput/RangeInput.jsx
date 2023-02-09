@@ -1,5 +1,6 @@
 import React from "react";
 import * as helpers from "../../utils/helpers";
+import ImageSkeleton from "../ImageSkeleton/ImageSkeleton";
 import "./range.input.css";
 
 const RangeInput = ({
@@ -18,15 +19,11 @@ const RangeInput = ({
     return null;
   }
 
-  if (loading) {
-    return (
-      <center>
-        <h2> processing thumbnails.....</h2>
-      </center>
-    );
-  }
-
-  return (
+  return loading ? (
+    <div className="range_pack">
+      <ImageSkeleton cards={10} />
+    </div>
+  ) : (
     <>
       <div className="range_pack">
         <div className="image_box">
