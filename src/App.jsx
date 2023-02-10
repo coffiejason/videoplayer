@@ -100,12 +100,6 @@ function App() {
 
     let startTime = ((rStart / 100) * videoMeta.duration).toFixed(2);
     let offset = ((rEnd / 100) * videoMeta.duration - startTime).toFixed(2);
-    // console.log(
-    //   startTime,
-    //   offset,
-    //   helpers.toTimeString(startTime),
-    //   helpers.toTimeString(offset)
-    // );
 
     try {
       FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
@@ -138,16 +132,11 @@ function App() {
   };
 
   const saveFile = async (data) => {
-    const a = document.createElement("a");
-    a.download = "output.mp4";
-
-    a.href = await helpers.readFileAsBase64(
-      new Blob([data.buffer], { type: "video/mp4" })
+    helpers.download(
+      await helpers.readFileAsBase64(
+        new Blob([data.buffer], { type: "video/mp4" })
+      )
     );
-    a.addEventListener("click", (e) => {
-      setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
-    });
-    a.click();
   };
 
   const makeEntry = () => {

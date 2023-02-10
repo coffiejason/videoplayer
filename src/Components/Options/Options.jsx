@@ -23,6 +23,7 @@ const Options = () => {
               <div className="inputBox">
                 <span>City:</span>
                 <select>
+                  <option>Select City</option>
                   <option>Accra</option>
                   <option>Yauonde</option>
                   <option>Abuja</option>
