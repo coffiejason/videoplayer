@@ -7,9 +7,11 @@ const Player = ({
   playPause,
   rangeUpdateStart,
   rangeUpdateEnd,
+  moveTo,
+  setMoveTo,
 }) => {
   const [progress, setProgress] = useState(0);
-  //const videoRef = React.createRef();
+  const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef();
 
   useEffect(() => {
@@ -17,6 +19,7 @@ const Player = ({
   }, [isPlaying]);
 
   const passMetaData = () => {
+    setVideoReady(true);
     loadedData(videoRef.current);
   };
 
@@ -30,12 +33,20 @@ const Player = ({
   };
 
   const forwaredReverse = (val) => {
-    const speed = 0.0005 * videoRef.current.duration;
+    const speed = 0.005 * videoRef.current.duration;
 
     val === true
       ? (videoRef.current.currentTime += speed)
       : (videoRef.current.currentTime -= speed);
   };
+
+  useEffect(() => {
+    //console.log("moved ", videoRef.current.currentTime);
+    const move = (parseInt(moveTo) / 55) * videoRef.current.duration;
+    console.log(move, videoRef.current.duration);
+
+    videoReady && (videoRef.current.currentTime = move);
+  }, [moveTo]);
 
   const handleKeyPress = (e) => {
     switch (e.key) {
@@ -59,13 +70,11 @@ const Player = ({
         return;
 
       default:
-        console.log("default");
         return;
     }
   };
 
   const handleProgress = (e) => {
-    console.log("time update", e.target.currentTime);
     if (isNaN(e.target.duration))
       // duration is NotaNumber at Beginning.
       return;

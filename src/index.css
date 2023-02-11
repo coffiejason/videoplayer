@@ -192,7 +192,7 @@ body {
   max-height: 400px;
 }
 
-.thumbnails a {
+.thumbnails .a {
   flex-grow: 1;
   height: 70px;
   margin: 2px;
@@ -207,7 +207,7 @@ body {
   transition: transform .3s;
 }
 
-.thumbnails a:hover img {
+.thumbnails .a:hover img {
   transform: scale(1.05);
 }
 

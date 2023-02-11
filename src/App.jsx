@@ -34,6 +34,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [isShow, setIsShow] = useState(false);
+  const [moveTo, setMoveTo] = useState(null);
 
   const onClose = () => {
     setIsShow(false);
@@ -57,8 +58,8 @@ function App() {
   const getThumbnails = async ({ duration }) => {
     if (!FF.isLoaded()) await FF.load();
     setThumbnailIsProcessing(true);
-    let MAX_NUMBER_OF_IMAGES = 15;
-    let NUMBER_OF_IMAGES = duration < MAX_NUMBER_OF_IMAGES ? duration : 15;
+    let MAX_NUMBER_OF_IMAGES = 55;
+    let NUMBER_OF_IMAGES = duration < MAX_NUMBER_OF_IMAGES ? duration : 55;
     let offset =
       duration === MAX_NUMBER_OF_IMAGES ? 1 : duration / NUMBER_OF_IMAGES;
 
@@ -75,7 +76,7 @@ function App() {
           "-i",
           "starbucks.mp4", //inputVideoFile.name,
           "-t",
-          "00:00:1.000",
+          "00:01:00",
           "-vf",
           `scale=150:-1`,
           `img${i}.png`
@@ -117,9 +118,9 @@ function App() {
       );
 
       const data = FF.FS("readFile", "ping.mp4");
-      const dataURL = await helpers.readFileAsBase64(
-        new Blob([data.buffer], { type: "video/mp4" })
-      );
+      // const dataURL = await helpers.readFileAsBase64(
+      //   new Blob([data.buffer], { type: "video/mp4" })
+      // );
 
       saveFile(data);
 
@@ -190,11 +191,14 @@ function App() {
             playPause={playPause}
             rangeUpdateStart={setRstart}
             rangeUpdateEnd={setRend}
+            moveTo={moveTo}
+            setMoveTo={setMoveTo}
           />
           <Options />
           <Navigator
             isLoading={thumbNails.length === 0 ? true : false}
             thumbNails={thumbNails}
+            setMoveTo={setMoveTo}
           />
         </div>
         <footer>

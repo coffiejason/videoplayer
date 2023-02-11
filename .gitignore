@@ -11,6 +11,8 @@ node_modules
 build
 dist-ssr
 *.local
+src/assets/aautv_05.mp4
+src/assets/aautv_05.mkv
 src/assets/bmf.mp4
 src/assets/output.mp4
 src/assets/output2.mp4

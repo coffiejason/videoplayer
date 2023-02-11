@@ -2,7 +2,12 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import ImageSkeleton from "../ImageSkeleton/ImageSkeleton";
 
-const Navigator = ({ isLoading, thumbNails }) => {
+const Navigator = ({ isLoading, thumbNails, setMoveTo }) => {
+  const handleClick = (e) => {
+    console.log(e.currentTarget.id);
+    setMoveTo(e.currentTarget.id);
+  };
+
   return (
     <>
       <aside>
@@ -12,13 +17,13 @@ const Navigator = ({ isLoading, thumbNails }) => {
           ) : (
             // <p>Loading</p>
             thumbNails.map((imgURL, id) => (
-              <a href="#">
+              <div className="a" onClick={handleClick} id={id}>
                 <img
                   src={imgURL}
                   alt={`sample_video_thumbnail_${id}`}
                   key={id}
                 />
-              </a>
+              </div>
             ))
           )}
         </div>
