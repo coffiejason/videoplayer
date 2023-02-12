@@ -17,7 +17,7 @@ const Navigator = ({ isLoading, thumbNails, setMoveTo }) => {
           ) : (
             // <p>Loading</p>
             thumbNails.map((imgURL, id) => (
-              <div className="a" onClick={handleClick} id={id}>
+              <div className="a" onClick={handleClick} key={id} id={id}>
                 <img
                   src={imgURL}
                   alt={`sample_video_thumbnail_${id}`}

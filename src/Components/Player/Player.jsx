@@ -24,20 +24,24 @@ const Player = ({
   };
 
   const handlePlayPause = () => {
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
+    if (videoReady) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      playPause;
     }
-    playPause;
   };
 
   const forwaredReverse = (val) => {
-    const speed = 0.005 * videoRef.current.duration;
+    if (videoReady) {
+      const speed = 0.005 * videoRef.current.duration;
 
-    val === true
-      ? (videoRef.current.currentTime += speed)
-      : (videoRef.current.currentTime -= speed);
+      val === true
+        ? (videoRef.current.currentTime += speed)
+        : (videoRef.current.currentTime -= speed);
+    }
   };
 
   useEffect(() => {
@@ -88,8 +92,8 @@ const Player = ({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
         />
         <div
           className="c-video"

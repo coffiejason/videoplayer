@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 import {
   Header,
@@ -10,18 +10,16 @@ import {
 } from "./Components";
 import * as helpers from "./utils/helpers";
 // import demoVideo2 from "./assets/3000kbs_starbucks.mp4";
-import demoVideo from "./assets/output2.mp4";
+import demoVideo from "./assets/aautv_05.mp4";
 import "./App.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const FF = createFFmpeg({ log: true }); // add url to ffmpeg
+const FF = createFFmpeg({ log: false }); // add url to ffmpeg
 
-const liveVideo2 =
-  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+const liveVideo = `https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4`;
 
-const liveVideo =
-  "https://g.mandela.h.sabishare.com/dl/zJhqauDAd04/fb06ad96c78bd2d4f7672a78e03dc599a23c946cf9f5af228cf717e8e78e1470/BMF_S02E02_-_Family_Business_(NetNaija.com).mkv";
+const liveVideo2 = `https://firebasestorage.googleapis.com/v0/b/maverick-media-kit.appspot.com/o/output2.mp4?alt=media&token=d797eb93-fa2f-4ae2-9697-ba1445c5e2a9`;
 
 function App() {
   const [videoMeta, setVideoMeta] = useState(null);
@@ -35,6 +33,18 @@ function App() {
 
   const [isShow, setIsShow] = useState(false);
   const [moveTo, setMoveTo] = useState(null);
+
+  //load video
+  const [videoBlobUrl, setVideoBlobUrl] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(demoVideo);
+      const blob = await response.blob();
+      const videoBlobUrl = URL.createObjectURL(blob);
+      setVideoBlobUrl(videoBlobUrl);
+    })();
+  }, [demoVideo]);
 
   const onClose = () => {
     setIsShow(false);
@@ -64,7 +74,7 @@ function App() {
       duration === MAX_NUMBER_OF_IMAGES ? 1 : duration / NUMBER_OF_IMAGES;
 
     const arrayOfImageURIs = [];
-    FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
+    FF.FS("writeFile", "starbucks.mp4", await fetchFile(videoBlobUrl));
 
     for (let i = 0; i < NUMBER_OF_IMAGES; i++) {
       let startTimeInSecs = helpers.toTimeString(Math.round(i * offset));
@@ -103,7 +113,7 @@ function App() {
     let offset = ((rEnd / 100) * videoMeta.duration - startTime).toFixed(2);
 
     try {
-      FF.FS("writeFile", "starbucks.mp4", await fetchFile(demoVideo));
+      FF.FS("writeFile", "starbucks.mp4", await fetchFile(videoBlobUrl));
       // await FF.run('-ss', '00:00:13.000', '-i', inputVideoFile.name, '-t', '00:00:5.000', 'ping.mp4');
       await FF.run(
         "-ss",
@@ -185,7 +195,7 @@ function App() {
         <Header />
         <div id="main">
           <Player
-            video={demoVideo}
+            video={videoBlobUrl}
             loadedData={handleLoadedData}
             isPlaying={isPlaying}
             playPause={playPause}
