@@ -10,7 +10,7 @@ import {
 } from "./Components";
 import * as helpers from "./utils/helpers";
 // import demoVideo2 from "./assets/3000kbs_starbucks.mp4";
-import demoVideo from "";
+import demoVideo from "./assets/3000kbs_starbucks.mp4";
 import "./App.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
